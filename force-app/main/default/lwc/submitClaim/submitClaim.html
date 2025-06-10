@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title="Submit Claim">
+        <div class="slds-p-around_medium">
+            <template if:true={claim}>
+                <div class="slds-grid slds-gutters slds-m-bottom_medium">
+                    <div class="slds-col">
+                        <p><strong>Claim Number:</strong> {claim.Name}</p>
+                        <p><strong>Service Date:</strong> {claim.ServiceDate__c}</p>
+                        <p><strong>Service Code:</strong> {claim.ServiceCode__c}</p>
+                        <p><strong>Amount:</strong> {claim.Amount__c}</p>
+                    </div>
+                </div>
+                <lightning-button 
+                    variant="brand" 
+                    label="Confirm Submit" 
+                    onclick={handleSubmit} 
+                    disabled={isNotValid}>
+                </lightning-button>
+            </template>
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Submitting claim to external system"></lightning-spinner>
+            </template>
+        </div>
+    </lightning-card>
+</template>

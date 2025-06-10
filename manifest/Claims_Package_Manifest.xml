@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Claims Core Objects -->
+    <types>
+        <members>Claim__c</members>
+        <members>ClaimLine__c</members>
+        <members>ClaimResponse__c</members>
+        <members>Payment__c</members>
+        <members>PreAuth__c</members>
+        <members>PreAuthDetail__c</members>
+        <name>CustomObject</name>
+    </types>
+
+    <!-- Claim Fields -->
+    <types>
+        <members>Claim__c.ServiceDate__c</members>
+        <members>Claim__c.ServiceCode__c</members>
+        <members>Claim__c.Patient__c</members>
+        <members>Claim__c.Status__c</members>
+        <members>Claim__c.ExternalClaimId__c</members>
+        <members>Claim__c.Amount__c</members>
+        <members>Claim__c.New_Field__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- Security -->
+    <types>
+        <members>MockPayerAPI</members>
+        <name>NamedCredential</name>
+    </types>
+    
+    <!-- Permissions -->
+    <types>
+        <members>ClaimsProcessor</members>
+        <name>PermissionSet</name>
+    </types>
+
+    <!-- UI Components -->
+    <types>
+        <members>Claim__c.Submit_Claim</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>Claim_Record_Page</members>
+        <name>FlexiPage</name>
+    </types>
+
+    <!-- Integration Log -->
+    <types>
+        <members>Integration_Log__c</members>
+        <name>CustomObject</name>
+    </types>
+    
+    <types>
+        <members>Integration_Log__c.Claim__c</members>
+        <members>Integration_Log__c.Direction__c</members>
+        <members>Integration_Log__c.Status__c</members>
+        <members>Integration_Log__c.Request_Body__c</members>
+        <members>Integration_Log__c.Response_Body__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <version>60.0</version>
+</Package>

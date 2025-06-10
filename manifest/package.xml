@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <!-- OBJECTS & FIELDS -->
+  <types>
+    <members>*</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CustomField</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>RecordType</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>BusinessProcess</name>
+  </types>
+
+  <!-- UI & PAGE LAYOUT -->
+  <types>
+    <members>*</members>
+    <name>Layout</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CompactLayout</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>LightningComponentBundle</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>FlexiPage</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>AppMenu</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CustomApplication</name>
+  </types>
+
+  <!-- APEX & AUTOMATION -->
+  <types>
+    <members>ClaimsProcessor</members>
+    <members>ClaimResponse</members>
+    <members>ClaimsException</members>
+    <members>ClaimsIntegrationService</members>
+    <name>ApexClass</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ApexTrigger</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ApexPage</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ApexComponent</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>Flow</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>Workflow</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ValidationRule</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>FlowDefinition</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>WorkflowRule</name>
+  </types>
+
+  <!-- PERMISSIONS -->
+  <types>
+    <members>*</members>
+    <name>Profile</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>PermissionSet</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>PermissionSetGroup</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CustomPermission</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>NamedCredential</name>
+  </types>
+
+  <!-- SHARING / SECURITY -->
+  <types>
+    <members>*</members>
+    <name>SharingRules</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>SharingSet</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ExternalDataSource</name>
+  </types>
+
+  <!-- MISC -->
+  <types>
+    <members>*</members>
+    <name>StaticResource</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CustomLabel</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>RemoteSiteSetting</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>NamedCredential</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CallCenter</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>QuickAction</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>HomePageComponent</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>HomePageLayout</name>
+  </types>
+
+  <!-- Claims & Payments -->
+  <types>
+    <members>Claim__c</members>
+    <members>ClaimLine__c</members>
+    <members>ClaimResponse__c</members>
+    <members>Payment__c</members>
+    <name>CustomObject</name>
+  </types>
+
+  <version>60.0</version>
+</Package>

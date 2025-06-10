@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Email_Test</name>
+        <label>Email Test</label>
+        <locationX>176</locationX>
+        <locationY>323</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <connector>
+            <targetReference>Update_the_record</targetReference>
+        </connector>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddresses</name>
+            <value>
+                <elementReference>Email</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>Test for flow subject</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <stringValue>Test for flow</stringValue>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>63.0</apiVersion>
+    <constants>
+        <description>jamesperram@gmail.com</description>
+        <name>Email</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>jamesperram@gmail.com</stringValue>
+        </value>
+    </constants>
+    <environments>Default</environments>
+    <interviewLabel>Trigger Plan goal and activity to tasks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Trigger Plan goal and activity to tasks</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_a_Task</name>
+        <label>Create a Task</label>
+        <locationX>176</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>ActivityDate</field>
+            <value>
+                <elementReference>$System.OriginDateTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Status</field>
+            <value>
+                <stringValue>Not Started</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Subject</field>
+            <value>
+                <stringValue>Follow up on Goal</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Task</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordUpdates>
+        <name>Update_the_record</name>
+        <label>Update the record</label>
+        <locationX>176</locationX>
+        <locationY>431</locationY>
+        <connector>
+            <targetReference>Create_a_Task</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>HealthCloudGA__Notes__c</field>
+            <value>
+                <stringValue>JAMES TEST</stringValue>
+            </value>
+        </inputAssignments>
+        <inputReference>$Record</inputReference>
+    </recordUpdates>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Email_Test</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>HealthCloudGA__RelatedCarePlanGoal1__c</field>
+            <operator>IsChanged</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <object>HealthCloudGA__EhrCarePlanActivity__c</object>
+        <recordTriggerType>Update</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+</Flow>

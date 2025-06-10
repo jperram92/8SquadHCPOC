@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <choices>
+        <name>BillingAddressChoice</name>
+        <choiceText>{!BillingAddressTemplate}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>BillingAddressTemplate</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>EmailChoice</name>
+        <choiceText>{!EmailTemplate}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>EmailTemplate</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>FaxChoice</name>
+        <choiceText>{!FaxTemplate}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>FaxTemplate</elementReference>
+        </value>
+    </choices>
+    <choices>
+        <name>ShippingAddressChoice</name>
+        <choiceText>{!ShippingAddressTemplate}</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <elementReference>ShippingAddressTemplate</elementReference>
+        </value>
+    </choices>
+    <constants>
+        <name>CaseSubject</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Member Card Request</stringValue>
+        </value>
+    </constants>
+    <constants>
+        <name>NotAvailable</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Not Available</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <description>Check if the user has selected the channels where data is available (Email, Shipping Address etc).</description>
+        <name>Channel_Data_Available</name>
+        <label>Channel Data Available ?</label>
+        <locationX>740</locationX>
+        <locationY>225</locationY>
+        <defaultConnector>
+            <targetReference>Create_Service_Case_SubFlow_Call</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Yes</defaultConnectorLabel>
+        <rules>
+            <name>No</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Is_NotAvailable_Present</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Delivery_Method_Data_Unavailable</targetReference>
+            </connector>
+            <label>No</label>
+        </rules>
+    </decisions>
+    <description>This flow is launched from the Account record page and lets the user create a service case when a member card is requested.</description>
+    <dynamicChoiceSets>
+        <description>Retrieve the list of available plans for a member.</description>
+        <name>MemberPlansChoice</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MemberId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>MemberPlan</object>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Asc</sortOrder>
+        <valueField>Name</valueField>
+    </dynamicChoiceSets>
+    <formulas>
+        <name>BillingAddressFormulaField</name>
+        <dataType>String</dataType>
+        <expression>IF(OR({!AccountRecord.BillingState}=&quot;&quot;, {!AccountRecord.BillingCity}=&quot;&quot;, {!AccountRecord.BillingStreet}=&quot;&quot;) , {!NotAvailable}, {!BillingAddressBaseTemplate})</expression>
+    </formulas>
+    <formulas>
+        <name>EmailFormulaField</name>
+        <dataType>String</dataType>
+        <expression>IF({!ContactRecord.Email} = &quot;&quot;, {!NotAvailable}, {!ContactRecord.Email})</expression>
+    </formulas>
+    <formulas>
+        <name>FaxFormulaField</name>
+        <dataType>String</dataType>
+        <expression>IF({!ContactRecord.Fax} = &quot;&quot;, {!NotAvailable}, {!ContactRecord.Fax})</expression>
+    </formulas>
+    <formulas>
+        <name>Is_NotAvailable_Present</name>
+        <dataType>Boolean</dataType>
+        <expression>CONTAINS({!Select_Channel},{!NotAvailable})</expression>
+    </formulas>
+    <formulas>
+        <name>ShippingAddressFormulaField</name>
+        <dataType>String</dataType>
+        <expression>IF(OR({!AccountRecord.ShippingState}=&quot;&quot;, {!AccountRecord.ShippingCity}=&quot;&quot;, {!AccountRecord.ShippingStreet}=&quot;&quot;) , {!NotAvailable}, {!ShippingAddressBaseTemplate})</expression>
+    </formulas>
+    <interviewLabel>Member Card Request {!recordId}_{!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>New Card Request</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Retrieves Account details especially extract Shipping/Billing info.</description>
+        <name>Get_Account_Details</name>
+        <label>Get Account Details</label>
+        <locationX>383</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Get_Contact_Email_And_Fax</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <outputReference>AccountRecord</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>BillingStreet</queriedFields>
+        <queriedFields>BillingCity</queriedFields>
+        <queriedFields>BillingState</queriedFields>
+        <queriedFields>BillingCountry</queriedFields>
+        <queriedFields>BillingPostalCode</queriedFields>
+        <queriedFields>ShippingStreet</queriedFields>
+        <queriedFields>ShippingCity</queriedFields>
+        <queriedFields>ShippingState</queriedFields>
+        <queriedFields>ShippingCountry</queriedFields>
+        <queriedFields>ShippingPostalCode</queriedFields>
+    </recordLookups>
+    <recordLookups>
+        <description>Retrieves the Contact Email and Fax Details.</description>
+        <name>Get_Contact_Email_And_Fax</name>
+        <label>Get Contact Email And Fax</label>
+        <locationX>561</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Delivery_Method</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>AccountId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <outputReference>ContactRecord</outputReference>
+        <queriedFields>Id</queriedFields>
+        <queriedFields>Email</queriedFields>
+        <queriedFields>Fax</queriedFields>
+    </recordLookups>
+    <screens>
+        <description>Present the user with the new Service Case details.</description>
+        <name>Case_Confirmation</name>
+        <label>Case Confirmation</label>
+        <locationX>1062</locationX>
+        <locationY>50</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Case_Confirmation_Message</name>
+            <fieldText>Case #{!CaseRecordFromSubFlow.CaseNumber} created {!CaseRecordFromSubFlow.CreatedDate}</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Lets the user choose one or more channels for receiving the member card.</description>
+        <name>Delivery_Method</name>
+        <label>Delivery Method</label>
+        <locationX>748</locationX>
+        <locationY>50</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Channel_Data_Available</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Channel</name>
+            <choiceReferences>EmailChoice</choiceReferences>
+            <choiceReferences>FaxChoice</choiceReferences>
+            <choiceReferences>BillingAddressChoice</choiceReferences>
+            <choiceReferences>ShippingAddressChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select delivery method</fieldText>
+            <fieldType>MultiSelectCheckboxes</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Inform the user that one of the channels chosen doesn&apos;t have the necessary data.</description>
+        <name>Delivery_Method_Data_Unavailable</name>
+        <label>Delivery Method Data Unavailable</label>
+        <locationX>536</locationX>
+        <locationY>219</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Channel_Data_Unavailable_Message</name>
+            <fieldText>Something&apos;s not right with one or more delivery options. Select a different option and try again.</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Screen to present the list of available plans for a member.</description>
+        <name>Member_Plans</name>
+        <label>Member Plans</label>
+        <locationX>190</locationX>
+        <locationY>51</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Get_Account_Details</targetReference>
+        </connector>
+        <fields>
+            <name>Select_a_Member_Plan</name>
+            <choiceReferences>MemberPlansChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select a Member Plan</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Member_Plans</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <description>Create a Service Case. This is a SubFlow call to the reusable Service Case creation flow.</description>
+        <name>Create_Service_Case_SubFlow_Call</name>
+        <label>Create Service Case SubFlow Call</label>
+        <locationX>910</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Case_Confirmation</targetReference>
+        </connector>
+        <flowName>Create_Service_Case</flowName>
+        <inputAssignments>
+            <name>CaseAccountId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CaseContactId</name>
+            <value>
+                <elementReference>ContactRecord.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CaseDescription</name>
+            <value>
+                <elementReference>CaseDescriptionTemplate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CaseSubject</name>
+            <value>
+                <elementReference>CaseSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>CaseRecordFromSubFlow</assignToReference>
+            <name>NewCaseRecord</name>
+        </outputAssignments>
+    </subflows>
+    <textTemplates>
+        <name>BillingAddressBaseTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>{!AccountRecord.BillingStreet}, {!AccountRecord.BillingCity}, {!AccountRecord.BillingState}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>BillingAddressTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>{!BillingAddress}: {!BillingAddressFormulaField}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>CaseDescriptionTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Member Card Request
+Plan - {!Select_a_Member_Plan}
+Delivery method - {!Select_Channel}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>EmailTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Email: {!EmailFormulaField}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>FaxTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Fax: {!FaxFormulaField}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ShippingAddressBaseTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>{!AccountRecord.ShippingStreet}, {!AccountRecord.ShippingCity}, {!AccountRecord.ShippingState}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>ShippingAddressTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Shipping Address: {!ShippingAddressFormulaField}</text>
+    </textTemplates>
+    <variables>
+        <name>accountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>AccountRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>BillingAddress</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Billing Address</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>CaseRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>CaseRecordFromSubFlow</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>ContactRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

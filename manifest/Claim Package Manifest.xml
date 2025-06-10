@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <!-- Claims Core Objects -->
+    <types>
+        <members>Claim__c</members>
+        <members>ClaimLine__c</members>
+        <members>ClaimResponse__c</members>
+        <members>Payment__c</members>
+        <members>PreAuth__c</members>
+        <members>PreAuthDetail__c</members>
+        <name>CustomObject</name>
+    </types>
+
+    <!-- Claim Fields -->
+    <types>
+        <members>Claim__c.ServiceDate__c</members>
+        <members>Claim__c.ServiceCode__c</members>
+        <members>Claim__c.Patient__c</members>
+        <members>Claim__c.Status__c</members>
+        <members>Claim__c.ExternalClaimId__c</members>
+        <members>Claim__c.Amount__c</members>
+        <name>CustomField</name>
+    </types>
+
+    <!-- Integration Components -->
+    <types>
+        <members>ClaimsProcessor</members>
+        <members>ClaimsIntegrationService</members>
+        <members>ClaimResponse</members>
+        <members>ClaimsException</members>
+        <name>ApexClass</name>
+    </types>
+
+    <!-- Security -->
+    <types>
+        <members>MockPayerAPI</members>
+        <name>NamedCredential</name>
+    </types>
+    
+    <!-- Permissions -->
+    <types>
+        <members>ClaimsProcessor</members>
+        <name>PermissionSet</name>
+    </types>
+
+    <!-- UI Components -->
+    <types>
+        <members>Claim_Record_Page</members>
+        <members>Claims_Home_Page</members>
+        <name>FlexiPage</name>
+    </types>
+
+    <version>60.0</version>
+</Package>

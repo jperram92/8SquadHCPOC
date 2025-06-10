@@ -1,0 +1,1001 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Health_Cloud_Lightning_Admin</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>Health_Cloud_Lightning_Console</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>Utilization_Management</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__AdvancedTherapyManagement</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__AllTabSet</application>
+        <default>true</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__AppLauncher</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Approvals</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Chatter</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Community</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Content</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__DataGovernanceConsole</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__DataManager</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__FlowsApp</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__ICMConsole</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Insights</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__InsuranceConsole</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningBolt</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningInstrumentation</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningSales</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__LightningScheduler</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__MSJApp</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Marketing</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__MedicalDevices</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__PatientServiceConsole</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Platform</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__PublicSectorInspectionManagement</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Sales</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__SalesforceCMS</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Service</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__ServiceConsole</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
+        <application>standard__Sites</application>
+        <default>false</default>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <classAccesses>
+        <apexClass>ClaimResponse</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimsException</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimsIntegrationService</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ClaimsProcessor</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <custom>false</custom>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Active__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.CustomerPriority__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.NumberofLocations__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.SLAExpirationDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.SLASerialNumber__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.SLA__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.UpsellOpportunity__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CareProviderSearchableField.Certification_Search__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>CareProviderSearchableField.Preferred_Language__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.EngineeringReqNumber__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.PotentialLiability__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Product__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.SLAViolation__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ClaimResponse__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Claim__c.Amount__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Claim__c.ExternalClaimId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Claim__c.Patient__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Claim__c.ServiceCode__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Claim__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Languages__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Level__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>HealthcareProvider.Certification__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>HealthcareProvider.Pref_Lang__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Integration_Log__c.Claim__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Integration_Log__c.Direction__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Integration_Log__c.Request_Body__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Integration_Log__c.Response_Body__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Integration_Log__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.CurrentGenerators__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.NumberofLocations__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Primary__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.ProductInterest__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.SICCode__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.CurrentGenerators__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.DeliveryInstallationStatus__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.MainCompetitors__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.OrderNumber__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Opportunity.TrackingNumber__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Payment__c.Amount__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>PreAuth__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>CloseCarePlanTasks</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Create_Service_Case</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Get_Required_Record_Type_ID</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Initiate_Appeal</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>LeadToPatientConversion</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Member_Card_Request</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Trigger_Plan_goal_and_activity_to_tasks</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>Update_PCP</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>ViewCarePlanGoals</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>ViewCarePlanProblems</flow>
+    </flowAccesses>
+    <flowAccesses>
+        <enabled>false</enabled>
+        <flow>ViewProblems</flow>
+    </flowAccesses>
+    <layoutAssignments>
+        <layout>ActionPlanTemplateAssignment-Action Plan Template Assignment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AdvTherapyFieldOptOverride-Advanced Therapy Field Optionality Override Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Applicant-Applicant Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ApplicationForm-Application Form Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ApplicationFormProduct-Application Form Product Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ApplicationFormTerm-%5F%5FMISSING LABEL%5F%5F PropertyFile - val ApplicationFormTerm not found in section StandardLayouts</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AppointmentInvitation-Appointment Invitation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Assessment-Assessment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentDefinition-Assessment Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentEnvelope-Assessment Envelope Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentEnvelopeItem-Assessment Envelope Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentIndDefinedValue-%5F%5FMISSING LABEL%5F%5F PropertyFile - val AssessmentIndDefinedValue not found in section StandardLayouts</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentIndicatorDefinition-Assessment Indicator Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentQuestionAssignment-Assessment Question Assignment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentQuestionSet-Assessment Question Set Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentQuestionVerChoice-%5F%5FMISSING LABEL%5F%5F PropertyFile - val AssessmentQuestionVerChoice not found in section StandardLayouts</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentSavedSession-Assessment Saved Session Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentSignature-Assessment Signature Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentStagedData-Assessment Staged Data Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentTask-Assessment Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentTaskContentDocument-Assessment Task Content Document Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>AssessmentTaskDefinition-Assessment Task Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CareEpisode-Care Episode Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CareEpisodeDetail-Care Episode Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePgmEnrolleeWkOrdStep-Care Program Enrollee Work Order Step Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePgmEnrolleeWorkOrder-Care Program Enrollee Work Order Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlan-Care Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanActivityDetail-Care Plan Activity Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanDetail-Care Plan Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanTemplate-Care Plan Template Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanTemplateBenefit-Care Plan Template Benefit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanTemplateGoal-Care Plan Template Goal Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CarePlanTemplateProblem-Care Plan Template Problem Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Case-CarePlanforSpondylitis</layout>
+        <recordType>Case.CarePlanforSpondylitis</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CaseParticipant-Case Participant Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ClaimResponse__c-Claim Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ClaimTeamMember-Claim Team Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Claim__c-Claim Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContractGroupPlan-Contract Group Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ContractGroupPlanGroupClass-Contract Group Plan Group Class Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustodyChainEntry-Custody Chain Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustodyItem-Custody Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>CustodyVerfcTypeOverride-Custody Verification Type Override Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DigitalVerfSetupDetail-Digital Verification Setup Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DigitalVerification-Digital Verification Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DigitalVerificationSetup-Digital Verification Setup Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Dispute-Dispute Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeItem-Dispute Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeItemArbitration-Dispute Item Arbitration Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeItemChargeback-Dispute Item Chargeback Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeItemQueueResponse-Dispute Item Queue Response Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeQueueJobRun-Dispute Queue Job Run Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DisputeReason-Dispute Reason Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>DocumentDecisionRequirement-Document Decision Requirement Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EngagementChannelType-Engagement Channel Type Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EngagementInteraction-Engagement Interaction Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>EngagementTopic-Engagement Topic Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ExternalAssessmentDefinition-External Assessment Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FinancialGoal-Financial Goal Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FinancialGoalFunding-Financial Goal Funding Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FinancialGoalParty-Financial Goal Party Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>FinancialPlan-Financial Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GenericVisitTask-Generic Visit Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GenericVisitTaskContext-Generic Visit Task Context Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GeoCountry-Geo Country Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GnrcVstKeyPerformanceInd-Generic Visit Key Performance Indicator Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GnrcVstTaskContextRelation-Generic Visit Task Context Relation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GoalAssignment-Goal Assignment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GoalAssignmentDetail-Goal Assignment Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GoalDefinition-Goal Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GroupCensus-Group Census Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GroupCensusMember-Group Census Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GroupCensusMemberPlan-Group Census Member Plan Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GroupClass-Group Class Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>GroupClassContribution-Group Class Contribution Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>InsPolicyTransactionDetail-Insurance Policy Transaction Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>InsuranceContract-Insurance Contract Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Integration_Log__c-Integration Log Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>InterestTag-Interest Tag Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedReconRecommendation-Medication Reconciliation Recommendation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedReconStmtRecommendation-Medication Reconciliation Statement Recommendation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedTherapyStmtReviewIssue-Medication Therapy Statement Review Issue Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedicationReconciliation-Medication Reconciliation Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedicationTherapyReview-Medication Therapy Review Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MedicationTherapyStmtReview-Medication Therapy Statement Review Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OmniAssessmentTask-Omni Assessment Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>OtherComponentTask-Other Component Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartyExpense-Party Expense Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PartyIncome-Party Income Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Payment__c-Payment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PreAuthDetail__c-Pre Auth Detail Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PreAuth__c-Pre Authorization Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ProblemGoalDefinition-Problem Goal Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>PublicComplaint-Public Complaint Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceAppointmentGroup-Service Appointment Group Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ServiceTerritoryRelationship-Service Territory Relationship Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ShiftWorkTopic-Shift Work Topic Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SignatureTask-Signature Task Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SignatureTaskLineItem-Signature Task Line Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SuggestedAssessmentDef-Suggested Assessment Definition Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>SuggestedAssessmentReason-Suggested Assessment Reason Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TagCategory-Tag Category Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TagCategoryAssignment-Tag Category Assignment Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Team-Team Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>TeamMember-Team Member Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Term-%5F%5FMISSING LABEL%5F%5F PropertyFile - val Term not found in section StandardLayouts</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Visit-Visit Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>VisitedParty-Visited Party Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Visitor-Visitor Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Waitlist-Waitlist Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkProcedure-Work Procedure Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkProcedureStep-Work Procedure Step Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkTypeExtension-Work Type Extension Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkTypeStep-Work Type Step Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkTypeStepLdTimeOvride-Work Type Step Lead Time Override Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>WorkTypeSvcTerrSchdPrio-Work Type Service Territory Scheduling Priority Layout</layout>
+    </layoutAssignments>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Account.CareProgramSponsor</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Account.IndustriesPayer</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Account.IndustriesPurchaser</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Account.TestRec</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.Admission</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.Appeal</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.Complaint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.ConcurrentReview</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.DrugRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.Grievance</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareDiagnosis.ServiceRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.Admission</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.Appeal</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.Complaint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.ConcurrentReview</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.DrugRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.Grievance</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequest.ServiceRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.Admission</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.Appeal</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.Complaint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.ConcurrentReview</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.DrugRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.Grievance</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestDrug.ServiceRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.Admission</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.Appeal</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.Complaint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.ConcurrentReview</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.DrugRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.Grievance</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>CareRequestItem.ServiceRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.Admission</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.Appeal</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.CarePlanforArthritis</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.CarePlanforMentalHealth</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Case.CarePlanforSpondylitis</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.Complaint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.ConcurrentReview</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.DrugRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.Grievance</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Case.ServiceRequest</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Contact.TestRec</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>PersonAccount.PersonAccount</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <userLicense>Salesforce Integration</userLicense>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiEnabled</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ApiUserOnly</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ChatterInternalUser</name>
+    </userPermissions>
+</Profile>

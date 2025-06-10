@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <constants>
+        <name>HMOPlanType</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>HMO</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <description>Check if the plan is of type &quot;HMO&quot;</description>
+        <name>HMO_Plan_Type</name>
+        <label>HMO Plan Type ?</label>
+        <locationX>328</locationX>
+        <locationY>205</locationY>
+        <defaultConnector>
+            <targetReference>Invalid_Plan_Type</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No</defaultConnectorLabel>
+        <rules>
+            <name>Yes</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>PurchaserPlanType</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>HMOPlanType</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Capture_New_PCP_Details</targetReference>
+            </connector>
+            <label>Yes</label>
+        </rules>
+    </decisions>
+    <description>This flow is launched from the Account record page and lets the user create a service case when a member requests a primary care physician change.</description>
+    <dynamicChoiceSets>
+        <description>Retrieve all member plans</description>
+        <name>MemberPlans_HMO_RecordChoice</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>MemberId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </filters>
+        <object>MemberPlan</object>
+        <sortField>CreatedDate</sortField>
+        <sortOrder>Desc</sortOrder>
+        <valueField>PlanId</valueField>
+    </dynamicChoiceSets>
+    <interviewLabel>Update Primary Care Physician  {!recordId}_{!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Update Primary Care Physician</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <recordLookups>
+        <description>Retrieve the Plan type</description>
+        <name>Get_Purchaser_Plan_Type</name>
+        <label>Get Purchaser Plan Type</label>
+        <locationX>335</locationX>
+        <locationY>50</locationY>
+        <assignNullValuesIfNoRecordsFound>true</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>HMO_Plan_Type</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Select_Member_Plan</elementReference>
+            </value>
+        </filters>
+        <object>PurchaserPlan</object>
+        <outputAssignments>
+            <assignToReference>PurchaserPlanType</assignToReference>
+            <field>PlanType</field>
+        </outputAssignments>
+    </recordLookups>
+    <screens>
+        <description>Capture the PCP details</description>
+        <name>Capture_New_PCP_Details</name>
+        <label>New Primary Care Physician</label>
+        <locationX>588</locationX>
+        <locationY>49</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Create_Service_Case_SubFlow_Call</targetReference>
+        </connector>
+        <fields>
+            <name>First_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Physician First Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Last_Name</name>
+            <dataType>String</dataType>
+            <fieldText>Physician Last Name</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Notes</name>
+            <fieldText>Notes</fieldText>
+            <fieldType>LargeTextArea</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Present the user with the new Service Case details.</description>
+        <name>Case_Confirmation</name>
+        <label>Case Confirmation</label>
+        <locationX>959</locationX>
+        <locationY>49</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Case_Confirmation_Message</name>
+            <fieldText>&lt;B&gt;Service Case created successfully&lt;/B&gt;
+Case Number -  {!CaseRecordFromSubFlow.CaseNumber}
+Case Description -  {!CaseRecordFromSubFlow.Description}</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Invalid_Plan_Type</name>
+        <label>Invalid Plan Type</label>
+        <locationX>339</locationX>
+        <locationY>399</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>InvalidPlanTypeMessage</name>
+            <fieldText>You have selected non HMO Plan. Please select HMO Plan.</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <description>Screen to present the list of available plans for a member.</description>
+        <name>Show_Member_Plans</name>
+        <label>Show Member Plans</label>
+        <locationX>185</locationX>
+        <locationY>50</locationY>
+        <allowBack>false</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Get_Purchaser_Plan_Type</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Member_Plan</name>
+            <choiceReferences>MemberPlans_HMO_RecordChoice</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Select Member Plan</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Show_Member_Plans</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <name>Create_Service_Case_SubFlow_Call</name>
+        <label>Create Service Case SubFlow Call</label>
+        <locationX>788</locationX>
+        <locationY>49</locationY>
+        <connector>
+            <targetReference>Case_Confirmation</targetReference>
+        </connector>
+        <flowName>Create_Service_Case</flowName>
+        <inputAssignments>
+            <name>CaseAccountId</name>
+            <value>
+                <elementReference>recordId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CaseDescription</name>
+            <value>
+                <elementReference>CaseDescriptionTemplate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>CaseSubject</name>
+            <value>
+                <elementReference>CaseSubject</elementReference>
+            </value>
+        </inputAssignments>
+        <outputAssignments>
+            <assignToReference>CaseRecordFromSubFlow</assignToReference>
+            <name>NewCaseRecord</name>
+        </outputAssignments>
+    </subflows>
+    <textTemplates>
+        <name>CaseDescriptionTemplate</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>Update PCP Request
+New Physician Name - {!First_Name} {!Last_Name}
+Notes - {!Notes}</text>
+    </textTemplates>
+    <variables>
+        <name>CaseRecordFromSubFlow</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>CaseSubject</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Update PCP Request</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>PurchaserPlanId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>PurchaserPlanType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

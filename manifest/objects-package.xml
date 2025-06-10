@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <!-- CUSTOM OBJECTS & METADATA -->
+  <types>
+    <members>*</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>CustomField</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>RecordType</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>BusinessProcess</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ValidationRule</name>
+  </types>
+  <types>
+    <members>*</members>
+    <name>ListView</name>
+  </types>
+
+  <version>60.0</version>
+</Package>

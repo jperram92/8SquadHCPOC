@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <brand>
+        <headerColor>#0070D2</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <description>Lightning version of Healthcloud Admin app where we consolidate all the Healthcloud related tabs together in one place</description>
+    <formFactors>Large</formFactors>
+    <isNavAutoTempTabsDisabled>false</isNavAutoTempTabsDisabled>
+    <isNavPersonalizationDisabled>false</isNavPersonalizationDisabled>
+    <isNavTabPersistenceDisabled>false</isNavTabPersistenceDisabled>
+    <isOmniPinnedViewEnabled>false</isOmniPinnedViewEnabled>
+    <label>Health Cloud - Lightning Admin</label>
+    <navType>Standard</navType>
+    <tabs>standard-Account</tabs>
+    <tabs>standard-Case</tabs>
+    <tabs>standard-Contact</tabs>
+    <tabs>HealthCloudGA__CandidatePatient__c</tabs>
+    <tabs>HealthCloudGA__TimelineViewConfiguration__c</tabs>
+    <tabs>HealthCloudGA__PatientCardViewConfiguration__c</tabs>
+    <tabs>HealthCloudGA__FilterCriterion__c</tabs>
+    <tabs>HealthCloudGA__CrossObjectRelationship__c</tabs>
+    <tabs>HealthCloudGA__EhrAllergyIntolerance__c</tabs>
+    <tabs>HealthCloudGA__EhrCarePlanActivity__c</tabs>
+    <tabs>HealthCloudGA__EhrCarePlanGoal__c</tabs>
+    <tabs>HealthCloudGA__EhrCarePlanParticipant__c</tabs>
+    <tabs>HealthCloudGA__EhrCarePlan__c</tabs>
+    <tabs>HealthCloudGA__EhrConditionRelatedItem__c</tabs>
+    <tabs>HealthCloudGA__EhrCondition__c</tabs>
+    <tabs>HealthCloudGA__EhrDevice__c</tabs>
+    <tabs>HealthCloudGA__EhrDosageInstruction__c</tabs>
+    <tabs>HealthCloudGA__EhrEncounterAccomodation__c</tabs>
+    <tabs>HealthCloudGA__EhrEncounterParticipant__c</tabs>
+    <tabs>HealthCloudGA__EhrEncounter__c</tabs>
+    <tabs>HealthCloudGA__EhrImmunizationReaction__c</tabs>
+    <tabs>HealthCloudGA__EhrImmunization__c</tabs>
+    <tabs>HealthCloudGA__EhrMedicationPrescription__c</tabs>
+    <tabs>HealthCloudGA__EhrMedicationStatement__c</tabs>
+    <tabs>HealthCloudGA__EhrObservation__c</tabs>
+    <tabs>HealthCloudGA__EhrPatientCareProvider__c</tabs>
+    <tabs>HealthCloudGA__EhrPatientContact__c</tabs>
+    <tabs>HealthCloudGA__EhrPatient__c</tabs>
+    <tabs>HealthCloudGA__EhrPractitionerQualification__c</tabs>
+    <tabs>HealthCloudGA__EhrPractitioner__c</tabs>
+    <tabs>HealthCloudGA__EhrRelatedObservation__c</tabs>
+    <tabs>HealthCloudGA__EhrRelatedPerson__c</tabs>
+    <tabs>HealthCloudGA__EhrVirtualDevice__c</tabs>
+    <tabs>HealthCloudGA__EhrVirtualDeviceChannel__c</tabs>
+    <tabs>standard-Lead</tabs>
+    <tabs>HealthCloudGA__ConditionToHCCCodeMapping__c</tabs>
+    <tabs>HealthCloudGA__ProgramPatientSummary__c</tabs>
+    <tabs>HealthCloudGA__ProgramPatientAffiliation__c</tabs>
+    <tabs>HealthCloudGA__Program__c</tabs>
+    <tabs>HealthCloudGA__Provider__c</tabs>
+    <tabs>Claim__c</tabs>
+    <uiType>Lightning</uiType>
+</CustomApplication>

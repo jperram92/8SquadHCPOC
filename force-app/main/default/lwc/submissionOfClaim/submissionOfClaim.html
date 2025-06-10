@@ -1,0 +1,58 @@
+<template>
+    <lightning-card title="Submit Claim" icon-name="standard:claim">
+        <div class="slds-p-around_medium">
+            <template if:true={claim}>
+                <div class="slds-box slds-m-bottom_medium">
+                    <dl class="slds-dl_horizontal slds-wrap">
+                        <dt class="slds-dl_horizontal__label">Claim Number:</dt>
+                        <dd class="slds-dl_horizontal__detail">{claimNumber}</dd>
+                        
+                        <dt class="slds-dl_horizontal__label">Service Date:</dt>
+                        <dd class="slds-dl_horizontal__detail">
+                            <lightning-formatted-date-time value={serviceDate}></lightning-formatted-date-time>
+                        </dd>
+                        
+                        <dt class="slds-dl_horizontal__label">Service Code:</dt>
+                        <dd class="slds-dl_horizontal__detail">{serviceCode}</dd>
+                        
+                        <dt class="slds-dl_horizontal__label">Amount:</dt>
+                        <dd class="slds-dl_horizontal__detail">
+                            <lightning-formatted-number value={amount} format-style="currency"></lightning-formatted-number>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">Status:</dt>
+                        <dd class="slds-dl_horizontal__detail">
+                            <lightning-badge label={status}></lightning-badge>
+                        </dd>
+                    </dl>
+                </div>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button 
+                        label="Submit Claim" 
+                        variant="brand"
+                        onclick={handleSubmit}
+                        disabled={submitDisabled}
+                        class="slds-m-right_small">
+                    </lightning-button>
+
+                    <template if:true={isLoading}>
+                        <lightning-spinner alternative-text="Submitting claim..." size="small"></lightning-spinner>
+                    </template>
+
+                    <template if:false={isDraft}>
+                        <div class="slds-text-color_error slds-m-top_x-small">
+                            Note: Only claims in Draft status can be submitted
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:false={claim}>
+                <div class="slds-text-body_regular slds-text-align_center">
+                    Loading claim details...
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

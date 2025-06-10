@@ -1,0 +1,16 @@
+{
+  "packageDirectories": [
+    {
+      "path": "force-app",
+      "default": true,
+      "package": "ClaimsManagement",
+      "versionName": "Claims Management v1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "definitionFile": "manifest/Claims_Package_Manifest.xml"
+    }
+  ],
+  "name": "8SquadHCPOC",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "60.0"
+}
