@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RemoteSiteSetting xmlns="http://soap.sforce.com/2006/04/metadata">
+    <isActive>true</isActive>
+    <label>RxNav</label>
+    <url>https://rxnav.nlm.nih.gov</url>
+</RemoteSiteSetting>

@@ -1,0 +1,62 @@
+<!--
+  @description       : 
+  @author            : jamesperram@gmail.com
+  @group             : 
+  @last modified on  : 06-11-2025
+  @last modified by  : jamesperram@gmail.com
+-->
+<template>
+    <lightning-card title="Drug Search">
+        <div class="slds-p-around_medium">
+            <lightning-input
+                type="search"
+                label="Search for drugs (e.g., Fluconazole, Simvastatin, Bosentan)"
+                value={searchTerm}
+                onchange={handleSearchChange}>
+            </ligh  tning-input>
+
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+
+            <template if:true={formattedSearchResults.length}>
+                <div class="slds-m-top_small">
+                    <lightning-combobox
+                        label="Select Drug"
+                        placeholder="Choose a drug"
+                        options={formattedSearchResults}
+                        onchange={handleDrugSelect}>
+                    </lightning-combobox>
+                </div>
+            </template>
+
+            <template if:true={selectedDrugs.length}>
+                <div class="slds-m-top_medium">
+                    <h2 class="slds-text-heading_medium">Selected Drugs</h2>
+                    <lightning-pill-container 
+                        items={selectedDrugs}
+                        onitemremove={handleDrugRemove}>
+                    </lightning-pill-container>
+                </div>
+            </template>
+
+            <template if:true={interactions.length}>
+                <div class="slds-m-top_medium">
+                    <h2 class="slds-text-heading_medium">Drug Interactions</h2>
+                    <lightning-datatable
+                        data={interactions}
+                        columns={columns}
+                        key-field="drugPair"
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-m-top_small">
+                    <div class="slds-text-color_error">{error}</div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
