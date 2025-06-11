@@ -12,31 +12,32 @@
                 type="search"
                 label="Search for drugs (e.g., Fluconazole, Simvastatin, Bosentan)"
                 value={searchTerm}
-                onchange={handleSearchChange}>
-            </ligh  tning-input>
+                onchange={handleSearchChange}
+            ></lightning-input>
 
             <template if:true={isLoading}>
                 <lightning-spinner alternative-text="Loading"></lightning-spinner>
             </template>
 
-            <template if:true={formattedSearchResults.length}>
+            <template if:true={searchResults.length}>
                 <div class="slds-m-top_small">
-                    <lightning-combobox
-                        label="Select Drug"
-                        placeholder="Choose a drug"
-                        options={formattedSearchResults}
-                        onchange={handleDrugSelect}>
-                    </lightning-combobox>
+                    <lightning-datatable
+                        key-field="rxcui"
+                        data={formattedSearchResults}
+                        columns={searchColumns}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column
+                    ></lightning-datatable>
                 </div>
             </template>
 
             <template if:true={selectedDrugs.length}>
                 <div class="slds-m-top_medium">
                     <h2 class="slds-text-heading_medium">Selected Drugs</h2>
-                    <lightning-pill-container 
+                    <lightning-pill-container
                         items={selectedDrugs}
-                        onitemremove={handleDrugRemove}>
-                    </lightning-pill-container>
+                        onitemremove={handleDrugRemove}
+                    ></lightning-pill-container>
                 </div>
             </template>
 
@@ -44,11 +45,11 @@
                 <div class="slds-m-top_medium">
                     <h2 class="slds-text-heading_medium">Drug Interactions</h2>
                     <lightning-datatable
-                        data={interactions}
-                        columns={columns}
                         key-field="drugPair"
-                        hide-checkbox-column>
-                    </lightning-datatable>
+                        data={formattedInteractions}
+                        columns={interactionColumns}
+                        hide-checkbox-column
+                    ></lightning-datatable>
                 </div>
             </template>
 
@@ -59,4 +60,7 @@
             </template>
         </div>
     </lightning-card>
+    
+    <!-- Include the modal component -->
+    <c-drug-details-modal></c-drug-details-modal>
 </template>

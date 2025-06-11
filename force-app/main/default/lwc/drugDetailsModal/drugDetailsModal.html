@@ -1,0 +1,148 @@
+<template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" onclick={handleClose}>
+                        <lightning-icon icon-name="utility:close" size="small"></lightning-icon>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">{drugDetails.name}</h2>
+                    <p class="slds-text-title">RxCUI: {drugDetails.rxcui}</p>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-wrap slds-gutters">
+                        <!-- Drug Identification -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <article class="slds-card">
+                                <div class="slds-card__header">
+                                    <h2 class="slds-text-heading_small">Drug Identification</h2>
+                                </div>
+                                <div class="slds-card__body slds-p-around_medium">
+                                    <dl class="slds-dl_horizontal slds-wrap">
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Name:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.name}</dd>
+                                        
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">RxCUI:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.rxcui}</dd>
+                                        
+                                        <template if:true={drugDetails.brandName}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">Brand Name:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.brandName}</dd>
+                                        </template>
+
+                                        <template if:true={drugDetails.ndc}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">NDC:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.ndc}</dd>
+                                        </template>
+                                    </dl>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Dosage Information -->
+                        <div class="slds-col slds-size_1-of-2">
+                            <article class="slds-card">
+                                <div class="slds-card__header">
+                                    <h2 class="slds-text-heading_small">Dosage Information</h2>
+                                </div>
+                                <div class="slds-card__body slds-p-around_medium">
+                                    <dl class="slds-dl_horizontal slds-wrap">
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Strength:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">
+                                            <lightning-badge label={strengthDisplay} class="slds-theme_info"></lightning-badge>
+                                        </dd>
+                                        
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Form:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.dosageForm}</dd>
+                                        
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Route:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.route}</dd>
+                                    </dl>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Classification -->
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_medium">
+                            <article class="slds-card">
+                                <div class="slds-card__header">
+                                    <h2 class="slds-text-heading_small">Classification</h2>
+                                </div>
+                                <div class="slds-card__body slds-p-around_medium">
+                                    <dl class="slds-dl_horizontal slds-wrap">
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Drug Class:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.drugClass}</dd>
+                                        
+                                        <dt class="slds-dl_horizontal__label slds-size_1-of-3">Type:</dt>
+                                        <dd class="slds-dl_horizontal__detail slds-size_2-of-3">
+                                            <lightning-badge label={genericLabel} class={genericClass}></lightning-badge>
+                                        </dd>
+
+                                        <template if:true={drugDetails.schedule}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">Schedule:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">
+                                                <lightning-badge label={scheduleDisplay} class="slds-theme_warning"></lightning-badge>
+                                            </dd>
+                                        </template>
+                                    </dl>
+                                </div>
+                            </article>
+                        </div>
+
+                        <!-- Marketing Information -->
+                        <div class="slds-col slds-size_1-of-2 slds-m-top_medium">
+                            <article class="slds-card">
+                                <div class="slds-card__header">
+                                    <h2 class="slds-text-heading_small">Marketing Information</h2>
+                                </div>
+                                <div class="slds-card__body slds-p-around_medium">
+                                    <dl class="slds-dl_horizontal slds-wrap">
+                                        <template if:true={drugDetails.marketingStatus}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">Status:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.marketingStatus}</dd>
+                                        </template>
+
+                                        <template if:true={drugDetails.labeler}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">Manufacturer:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.labeler}</dd>
+                                        </template>
+
+                                        <template if:true={drugDetails.packageSizes}>
+                                            <dt class="slds-dl_horizontal__label slds-size_1-of-3">Package Sizes:</dt>
+                                            <dd class="slds-dl_horizontal__detail slds-size_2-of-3">{drugDetails.packageSizes}</dd>
+                                        </template>
+                                    </dl>
+                                </div>
+                            </article>
+                        </div>
+                        
+                        <!-- Warnings Section -->
+                        <template if:true={hasWarnings}>
+                            <div class="slds-col slds-size_1-of-1 slds-m-top_medium">
+                                <article class="slds-card slds-card_boundary">
+                                    <div class="slds-card__header slds-theme_error">
+                                        <h2 class="slds-text-heading_small">Warnings and Precautions</h2>
+                                    </div>
+                                    <div class="slds-card__body slds-p-around_medium">
+                                        <ul class="slds-list_dotted">
+                                            <template for:each={drugDetails.warnings} for:item="warning">
+                                                <li key={warning} class="slds-p-vertical_xx-small">{warning}</li>
+                                            </template>
+                                        </ul>
+                                    </div>
+                                </article>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleClose}>Close</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

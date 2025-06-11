@@ -19,11 +19,24 @@ public with sharing class RxNormService {
         @AuraEnabled public String rxcui { get; set; }
         @AuraEnabled public String name { get; set; }
         @AuraEnabled public String synonym { get; set; }
+        @AuraEnabled public String strength { get; set; }
+        @AuraEnabled public String dosageForm { get; set; }
+        @AuraEnabled public String drugClass { get; set; }
+        @AuraEnabled public Boolean isGeneric { get; set; }
+        @AuraEnabled public String brandName { get; set; }
+        @AuraEnabled public String genericName { get; set; }
+        @AuraEnabled public String route { get; set; }
+        @AuraEnabled public String ndc { get; set; }
+        @AuraEnabled public String schedule { get; set; }
+        @AuraEnabled public String packageSizes { get; set; }
+        @AuraEnabled public String marketingStatus { get; set; }
+        @AuraEnabled public String labeler { get; set; }
+        @AuraEnabled public List<String> warnings { get; set; }
         
-        public DrugSearchResult(String rxcui, String name, String synonym) {
+        public DrugSearchResult(String rxcui, String name) {
             this.rxcui = rxcui;
             this.name = name;
-            this.synonym = synonym;
+            this.warnings = new List<String>();
         }
     }
 
@@ -111,11 +124,14 @@ public with sharing class RxNormService {
                                 List<Object> properties = (List<Object>)groupData.get('conceptProperties');
                                 for(Object propObj : properties) {
                                     Map<String, Object> prop = (Map<String, Object>)propObj;
-                                    results.add(new DrugSearchResult(
+                                    DrugSearchResult drug = new DrugSearchResult(
                                         String.valueOf(prop.get('rxcui')),
-                                        String.valueOf(prop.get('name')),
-                                        String.valueOf(prop.get('synonym'))
-                                    ));
+                                        String.valueOf(prop.get('name'))
+                                    );
+                                    
+                                    // Enhance with additional API calls
+                                    enrichDrugInformation(drug);
+                                    results.add(drug);
                                 }
                             }
                         }
@@ -205,5 +221,118 @@ public with sharing class RxNormService {
         }
     }
 
+    private static void enrichDrugInformation(DrugSearchResult drug) {
+        try {
+            // Get detailed drug properties
+            String detailsEndpoint = ENDPOINT + '/REST/rxcui/' + drug.rxcui + '/allProperties.json?prop=all';
+            
+            HttpRequest req = new HttpRequest();
+            req.setEndpoint(detailsEndpoint);
+            req.setMethod('GET');
+            
+            Http http = new Http();
+            HttpResponse res = http.send(req);
+            
+            if (res.getStatusCode() == 200) {
+                Map<String, Object> response = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
+                Map<String, Object> propGroup = (Map<String, Object>)response.get('propConceptGroup');
+                
+                if (propGroup != null) {
+                    List<Object> properties = (List<Object>)propGroup.get('propConcept');
+                    for(Object prop : properties) {
+                        Map<String, Object> property = (Map<String, Object>)prop;
+                        processPropertyValue(drug, property);
+                    }
+                }
+            }
+
+            // Get NDC information
+            getNDCInformation(drug);
+            
+            // Get brand name information
+            getBrandInformation(drug);
+
+        } catch(Exception e) {
+            System.debug(LoggingLevel.ERROR, 'Error enriching drug data: ' + e.getMessage());
+        }
+    }
+
+    private static void processPropertyValue(DrugSearchResult drug, Map<String, Object> property) {
+        String category = String.valueOf(property.get('category'));
+        String value = String.valueOf(property.get('value'));
+        
+        switch on category.toUpperCase() {
+            when 'STRENGTH' {
+                drug.strength = value;
+            }
+            when 'DOSEFORM' {
+                drug.dosageForm = value;
+            }
+            when 'SCHEDULE' {
+                drug.schedule = value;
+            }
+            when 'ROUTE' {
+                drug.route = value;
+            }
+            when 'TTY' {
+                drug.isGeneric = value == 'SCD' || value == 'SCDC';
+            }
+            when 'CLASS' {
+                drug.drugClass = value;
+            }
+            when 'MANUFACTURERINFO' {
+                drug.labeler = value;
+            }
+        }
+    }
+
+    private static void getNDCInformation(DrugSearchResult drug) {
+        String ndcEndpoint = ENDPOINT + '/REST/rxcui/' + drug.rxcui + '/ndcs.json';
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(ndcEndpoint);
+        req.setMethod('GET');
+        
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        
+        if (res.getStatusCode() == 200) {
+            Map<String, Object> response = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
+            Map<String, Object> ndcGroup = (Map<String, Object>)response.get('ndcGroup');
+            if (ndcGroup != null && ndcGroup.containsKey('ndcList')) {
+                List<Object> ndcList = (List<Object>)ndcGroup.get('ndcList');
+                if (!ndcList.isEmpty()) {
+                    drug.ndc = String.valueOf(ndcList[0]);
+                }
+            }
+        }
+    }
+
+    private static void getBrandInformation(DrugSearchResult drug) {
+        String brandEndpoint = ENDPOINT + '/REST/rxcui/' + drug.rxcui + '/related.json?tty=BN';
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint(brandEndpoint);
+        req.setMethod('GET');
+        
+        Http http = new Http();
+        HttpResponse res = http.send(req);
+        
+        if (res.getStatusCode() == 200) {
+            Map<String, Object> response = (Map<String, Object>)JSON.deserializeUntyped(res.getBody());
+            Map<String, Object> relatedGroup = (Map<String, Object>)response.get('relatedGroup');
+            if (relatedGroup != null && relatedGroup.containsKey('conceptGroup')) {
+                List<Object> conceptGroups = (List<Object>)relatedGroup.get('conceptGroup');
+                for(Object brandConcept : conceptGroups) {
+                    Map<String, Object> brandData = (Map<String, Object>)brandConcept;
+                    if (brandData.containsKey('conceptProperties')) {
+                        List<Object> properties = (List<Object>)brandData.get('conceptProperties');
+                        if (!properties.isEmpty()) {
+                            Map<String, Object> firstBrand = (Map<String, Object>)properties[0];
+                            drug.brandName = String.valueOf(firstBrand.get('name'));
+                        }
+                    }
+                }
+            }
+        }
+    }
     public class RxNormException extends Exception {}
 }
