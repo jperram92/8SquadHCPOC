@@ -1,0 +1,72 @@
+<!--
+  @description       : 
+  @author            : jamesperram@gmail.com
+  @group             : 
+  @last modified on  : 06-11-2025
+  @last modified by  : jamesperram@gmail.com
+-->
+<template>
+    <lightning-card title="Drug Search">
+        <div class="slds-p-around_medium">
+            <lightning-input
+                type="search"
+                label="Search for drugs"
+                placeholder="Try searching for: Fluconazole, Simvastatin, or Bosentan"
+                value={searchTerm}
+                onchange={handleSearchChange}>
+            </lightning-input>
+
+            <template if:true={isLoading}>
+                <lightning-spinner
+                    alternative-text="Searching for drugs...">
+                </lightning-spinner>
+            </template>
+
+            <template if:true={searchResults.length}>
+                <div class="slds-m-top_small">
+                    <lightning-datatable
+                        key-field="rxcui"
+                        data={formattedSearchResults}
+                        columns={searchColumns}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <template if:true={selectedDrugs.length}>
+                <div class="slds-m-top_medium">
+                    <h2 class="slds-text-heading_medium">Selected Drugs</h2>
+                    <lightning-pill-container
+                        items={selectedDrugs}
+                        onitemremove={handleDrugRemove}>
+                    </lightning-pill-container>
+                </div>
+            </template>
+
+            <template if:true={interactions.length}>
+                <div class="slds-m-top_medium">
+                    <h2 class="slds-text-heading_medium">Drug Interactions</h2>
+                    <lightning-datatable
+                        key-field="drugPair"
+                        data={formattedInteractions}
+                        columns={interactionColumns}
+                        hide-checkbox-column>
+                    </lightning-datatable>
+                </div>
+            </template>
+
+            <template if:true={error}>
+                <div class="slds-m-top_small">
+                    <div class="slds-text-color_error">{error}</div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+    
+    <c-drug-details-modal></c-drug-details-modal>
+    <c-confirmation-modal 
+        onconfirm={handleConfirmAddDrug}
+        oncancel={handleCancelAddDrug}>
+    </c-confirmation-modal>
+</template>

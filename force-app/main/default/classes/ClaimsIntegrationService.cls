@@ -89,6 +89,16 @@ public with sharing class ClaimsIntegrationService {
                 if(responseMap.containsKey('paymentDetails')) {
                     Map<String, Object> paymentDetails = (Map<String, Object>)responseMap.get('paymentDetails');
                     claim.Payment_Transaction_ID__c = 'TXN-' + String.valueOf(System.currentTimeMillis());
+                    
+                    // Check for medication interactions if this is a pharmacy claim
+                    if(claim.Claims_Type__c == 'Pharmacy') {
+                        List<String> rxcuis = getMedicationRxCUIs(claim.Patient__c);
+                        if(!rxcuis.isEmpty()) {
+                            List<RxNormService.InteractionPair> interactions = 
+                                RxNormService.checkInteractions(rxcuis);
+                            logMedicationInteractions(interactions, claim.Patient__c);
+                        }
+                    }
                 }
                 claim.Payment_Date__c = DateTime.now();
                 update claim;
@@ -106,6 +116,31 @@ public with sharing class ClaimsIntegrationService {
             System.debug(LoggingLevel.ERROR, '>>> Callout Error: ' + e.getMessage());
             System.debug(LoggingLevel.ERROR, '>>> Stack Trace: ' + e.getStackTraceString());
             throw new ClaimsException('Failed to submit claim: ' + e.getMessage());
+        }
+    }
+
+    private static List<String> getMedicationRxCUIs(Id patientId) {
+        List<String> rxcuis = new List<String>();
+        // Query for patient's medications and collect RxCUIs
+        // Implementation depends on your data model
+        return rxcuis;
+    }
+
+    private static void logMedicationInteractions(
+        List<RxNormService.InteractionPair> interactions, 
+        Id patientId
+    ) {
+        List<Medication_Interaction__c> interactionsToInsert = new List<Medication_Interaction__c>();
+        for(RxNormService.InteractionPair pair : interactions) {
+            interactionsToInsert.add(new Medication_Interaction__c(
+                Patient__c = patientId,
+                Description__c = pair.description,
+                Severity__c = pair.severity,
+                Drug_Pair__c = pair.drugPair
+            ));
+        }
+        if(!interactionsToInsert.isEmpty()) {
+            insert interactionsToInsert;
         }
     }
 }
