@@ -3,12 +3,17 @@
     <apiVersion>57.0</apiVersion>
     <isExposed>true</isExposed>
     <masterLabel>Drug Search and Interactions</masterLabel>
-    <description>Search for drugs and view potential interactions between medications</description>
+    <description>Search for drugs and check interactions</description>
     <targets>
         <target>lightning__AppPage</target>
         <target>lightning__RecordPage</target>
         <target>lightning__HomePage</target>
-        <target>lightningCommunity__Page</target>
-        <target>lightningCommunity__Default</target>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Account</object>
+            </objects>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>

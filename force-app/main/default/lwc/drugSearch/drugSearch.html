@@ -10,13 +10,16 @@
         <div class="slds-p-around_medium">
             <lightning-input
                 type="search"
-                label="Search for drugs (e.g., Fluconazole, Simvastatin, Bosentan)"
+                label="Search for drugs"
+                placeholder="Try searching for: Fluconazole, Simvastatin, or Bosentan"
                 value={searchTerm}
-                onchange={handleSearchChange}
-            ></lightning-input>
+                onchange={handleSearchChange}>
+            </lightning-input>
 
             <template if:true={isLoading}>
-                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+                <lightning-spinner
+                    alternative-text="Searching for drugs...">
+                </lightning-spinner>
             </template>
 
             <template if:true={searchResults.length}>
@@ -26,8 +29,8 @@
                         data={formattedSearchResults}
                         columns={searchColumns}
                         onrowaction={handleRowAction}
-                        hide-checkbox-column
-                    ></lightning-datatable>
+                        hide-checkbox-column>
+                    </lightning-datatable>
                 </div>
             </template>
 
@@ -36,8 +39,8 @@
                     <h2 class="slds-text-heading_medium">Selected Drugs</h2>
                     <lightning-pill-container
                         items={selectedDrugs}
-                        onitemremove={handleDrugRemove}
-                    ></lightning-pill-container>
+                        onitemremove={handleDrugRemove}>
+                    </lightning-pill-container>
                 </div>
             </template>
 
@@ -48,8 +51,8 @@
                         key-field="drugPair"
                         data={formattedInteractions}
                         columns={interactionColumns}
-                        hide-checkbox-column
-                    ></lightning-datatable>
+                        hide-checkbox-column>
+                    </lightning-datatable>
                 </div>
             </template>
 
@@ -61,6 +64,9 @@
         </div>
     </lightning-card>
     
-    <!-- Include the modal component -->
     <c-drug-details-modal></c-drug-details-modal>
+    <c-confirmation-modal 
+        onconfirm={handleConfirmAddDrug}
+        oncancel={handleCancelAddDrug}>
+    </c-confirmation-modal>
 </template>

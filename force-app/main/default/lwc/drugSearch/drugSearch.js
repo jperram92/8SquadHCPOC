@@ -1,6 +1,8 @@
-import { LightningElement, wire, track } from 'lwc';
+import { LightningElement, api, track } from 'lwc';
+import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import searchDrugs from '@salesforce/apex/RxNormService.searchDrugs';
 import checkInteractions from '@salesforce/apex/RxNormService.checkInteractions';
+import createMedication from '@salesforce/apex/MedicationService.createMedication';
 
 export default class DrugSearch extends LightningElement {
     @track searchTerm = '';
@@ -9,6 +11,9 @@ export default class DrugSearch extends LightningElement {
     @track interactions = [];
     @track isLoading = false;
     @track error;
+    @track pendingDrug;
+
+    @api recordId; // This will hold the Patient ID when used in a record page
 
     columns = [
         { label: 'Drug Pair', fieldName: 'drugPair', type: 'text' },
@@ -124,67 +129,35 @@ export default class DrugSearch extends LightningElement {
 
     async performSearch() {
         this.isLoading = true;
+        this.error = null;
         try {
             const results = await searchDrugs({ searchTerm: this.searchTerm });
             this.searchResults = results || [];
+            if (this.searchResults.length === 0) {
+                this.showToast('Info', 'No drugs found matching your search.', 'info');
+            }
         } catch (error) {
             this.error = error.message;
+            this.showToast('Error', 'Failed to search for drugs: ' + error.message, 'error');
         } finally {
             this.isLoading = false;
         }
     }
 
-    handleDrugSelect(event) {
-        const selectedRxcui = event.detail.value;
-        const selectedDrug = this.searchResults.find(drug => drug.rxcui === selectedRxcui);
-        
-        if (selectedDrug && !this.selectedDrugs.some(drug => drug.rxcui === selectedDrug.rxcui)) {
-            this.selectedDrugs = [...this.selectedDrugs, {
-                label: selectedDrug.name,
-                name: selectedDrug.name,
-                rxcui: selectedDrug.rxcui
-            }];
-            this.checkDrugInteractions();
-        }
-    }
-
-    handleDrugRemove(event) {
-        const rxcuiToRemove = event.detail.item.rxcui;
-        this.selectedDrugs = this.selectedDrugs.filter(drug => drug.rxcui !== rxcuiToRemove);
-        if (this.selectedDrugs.length >= 2) {
-            this.checkDrugInteractions();
-        } else {
-            this.interactions = [];
-        }
-    }
-
-    async checkDrugInteractions() {
-        if (this.selectedDrugs.length >= 2) {
-            try {
-                this.interactions = await checkInteractions({ 
-                    rxcuiList: this.selectedDrugs.map(drug => drug.rxcui) 
-                });
-            } catch (error) {
-                this.error = error.message;
-            }
-        }
-    }
-
     handleRowAction(event) {
-        const action = event.detail.action;
+        const actionName = event.detail.action.name;
         const row = event.detail.row;
         
-        switch (action.name) {
+        switch (actionName) {
             case 'select':
-                this.handleDrugSelect({ detail: { value: row.rxcui } });
+                this.confirmAddDrug(row);
                 break;
             case 'view_details':
                 const modalComponent = this.template.querySelector('c-drug-details-modal');
                 if (modalComponent) {
-                    // Pass all available drug information to the modal
                     const drugInfo = {
                         ...row,
-                        name: row.displayName,
+                        name: row.displayName || row.name,
                         rxcui: row.rxcui,
                         strength: row.strength,
                         dosageForm: row.dosageForm,
@@ -201,6 +174,99 @@ export default class DrugSearch extends LightningElement {
                     modalComponent.show(drugInfo);
                 }
                 break;
+        }
+    }
+
+    confirmAddDrug(drug) {
+        if (!this.recordId) {
+            this.showToast('Error', 'No patient record selected. Please use this component on a patient record page.', 'error');
+            return;
+        }
+
+        this.pendingDrug = drug;
+        const modal = this.template.querySelector('c-confirmation-modal');
+        if (modal) {
+            modal.show(
+                'Add Medication',
+                'Are you sure you want to add this medication to the patient\'s record?',
+                drug
+            );
+        }
+    }
+
+    async handleConfirmAddDrug() {
+        if (this.pendingDrug) {
+            await this.createAndAddDrug(this.pendingDrug);
+            this.pendingDrug = null;
+        }
+    }
+
+    handleCancelAddDrug() {
+        this.pendingDrug = null;
+    }
+
+    async createAndAddDrug(drug) {
+        if (!this.recordId) {
+            this.showToast('Error', 'Patient ID is required', 'error');
+            return;
+        }
+
+        try {
+            await createMedication({
+                rxcui: drug.rxcui,
+                name: drug.displayName || drug.name,
+                strength: drug.strength,
+                dosageForm: drug.dosageForm,
+                patientId: this.recordId
+            });
+
+            this.selectedDrugs = [...this.selectedDrugs, {
+                label: drug.displayName || drug.name,
+                name: drug.displayName || drug.name,
+                rxcui: drug.rxcui
+            }];
+
+            this.showToast('Success', `Added ${drug.name} to medications`, 'success');
+            
+            if (this.selectedDrugs.length >= 2) {
+                await this.checkDrugInteractions();
+            }
+        } catch (error) {
+            this.showToast('Error', error.message, 'error');
+        }
+    }
+
+    showToast(title, message, variant) {
+        if (!title || !message) return;
+        
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: title,
+                message: message,
+                variant: variant || 'info'
+            })
+        );
+    }
+
+    async checkDrugInteractions() {
+        if (this.selectedDrugs.length >= 2) {
+            try {
+                this.interactions = await checkInteractions({ 
+                    rxcuiList: this.selectedDrugs.map(drug => drug.rxcui) 
+                });
+            } catch (error) {
+                this.error = error.message;
+            }
+        }
+    }
+
+    handleDrugRemove(event) {
+        const rxcuiToRemove = event.detail.item.rxcui;
+        this.selectedDrugs = this.selectedDrugs.filter(drug => drug.rxcui !== rxcuiToRemove);
+        if (this.selectedDrugs.length >= 2) {
+            this.checkDrugInteractions();
+        } else {
+            this.interactions = [];
         }
     }
 

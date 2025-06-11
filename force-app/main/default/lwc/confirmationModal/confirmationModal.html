@@ -1,0 +1,31 @@
+<template>
+    <template if:true={showModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <h2 class="slds-text-heading_medium">{title}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <p>{message}</p>
+                    <template if:true={drugDetails}>
+                        <div class="slds-box slds-m-top_small">
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">Drug Name:</dt>
+                                <dd class="slds-dl_horizontal__detail">{drugDetails.name}</dd>
+                                <dt class="slds-dl_horizontal__label">Strength:</dt>
+                                <dd class="slds-dl_horizontal__detail">{drugDetails.strength}</dd>
+                                <dt class="slds-dl_horizontal__label">Form:</dt>
+                                <dd class="slds-dl_horizontal__detail">{drugDetails.dosageForm}</dd>
+                            </dl>
+                        </div>
+                    </template>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick={handleCancel}>Cancel</button>
+                    <button class="slds-button slds-button_brand" onclick={handleConfirm}>Confirm</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
